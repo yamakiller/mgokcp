@@ -133,6 +133,6 @@ func (slf *KCP) NoDelay(nodelay, interval, resend, nc int32) int32 {
 }
 
 //GetConv 保证ptr的连续性 make([]byte, n)
-func (slf *KCP) GetConv(ptr []byte) uint32 {
+func GetConv(ptr []byte) uint32 {
 	return uint32(C.mkcp_getconv((*C.char)(unsafe.Pointer(&ptr[0]))))
 }
