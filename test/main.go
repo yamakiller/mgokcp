@@ -17,6 +17,7 @@ var (
 // 模拟网络：模拟发送一个 udp包
 func udpOutput(buffer []byte, user interface{}) int32 {
 	id := user.(int)
+	fmt.Println("udpOutput,", len(buffer))
 	vnet.Send(id, buffer, len(buffer))
 	return 0
 }

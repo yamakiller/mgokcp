@@ -1074,6 +1074,7 @@ void ikcp_flush(ikcpcb *kcp)
 			}
 		}
 
+
 		if (needsend) {
 			int size, need;
 			segment->ts = current;

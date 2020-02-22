@@ -16,6 +16,7 @@ package mkcp
 */
 import "C"
 import (
+	"errors"
 	"unsafe"
 )
 
@@ -65,10 +66,17 @@ func (slf *KCP) Recv(buffer []byte, size int32) int32 {
 }
 
 //Send 发送数据 buffer 保证内存连续性　make([]byte, n)
-func (slf *KCP) Send(buffer []byte, size int32) int32 {
-	return int32(C.mkcp_send(slf._kcp,
+func (slf *KCP) Send(buffer []byte, size int32) (int32, error) {
+	n := int32(C.mkcp_send(slf._kcp,
 		(*C.char)(unsafe.Pointer(&buffer[0])),
 		C.int(size)))
+	if n == -1 {
+		return 0, errors.New("Waiting to send data smaller than 0")
+	} else if n == -2 {
+		return 0, errors.New("Data window overflow")
+	}
+
+	return size, nil
 }
 
 //Update ....

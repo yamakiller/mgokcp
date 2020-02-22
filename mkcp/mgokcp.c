@@ -1,7 +1,9 @@
 #include "_cgo_export.h"
 #include <stdint.h>
+#include <stdio.h>
+#include <string.h>
 
-int go_output_wrapper(const char *buf, int len,  ikcpcb *kcp, void *user) {
+int go_output_wrapper(const char *buf, int len,  ikcpcb *kcp, void *user) {   
     GoSlice slice;
     slice.data = (void*)buf;
     slice.len  = len;
